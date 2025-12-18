@@ -3,7 +3,7 @@
        <span class="text-[darkblue] font-bold">{{$label}}</span><span class="text-[red]">@if($required==true)*@endif</span> 
     </div>
     <div>
-       <input type="number" wire:model="annabaFields.{{$field}}" class="w-full  bg-[#E8E8E8] h-[50px]
+       <input type="number" wire:model="annabaFields.{{$field}}" class="w-full rounded-[4px] h-[50px]
       border-[darkblue] border-[1px]"
       step="{{$step}}"
       @if($min != false)

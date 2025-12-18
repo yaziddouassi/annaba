@@ -32,6 +32,9 @@ class $e extends AnnabaCreator
     public \$annabaModel = \"$a\";
     public \$annabaModelName =  \"$b\";
     public \$annabaModelClass = \"$c\";
+    public \$annabaBtnCreateLabel = 'Valider';
+    public \$annabaBtnCreateOtherLabel = 'Creer un autre';
+    public \$annabaBtnCreateOther = 'yes';
     
     public \$annabaNullables = [];
     public \$annabaRecord = null;

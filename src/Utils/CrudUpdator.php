@@ -32,6 +32,7 @@ class $e extends AnnabaUpdate
     public \$annabaModel = \"$a\";
     public \$annabaModelName =  \"$b\";
     public \$annabaModelClass = \"$c\";
+    public \$annabaBtnModifierLabel = 'Modifier';
     
     public \$annabaNullables = [];
     public \$annabaRecord = null;

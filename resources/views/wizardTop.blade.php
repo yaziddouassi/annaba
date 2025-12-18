@@ -1,5 +1,5 @@
 <div class="p-[10px]">
-    <div class=" bg-[#EEE] flex flex-wrap justify-evenly">
+    <div class="flex flex-wrap justify-evenly">
 
       @foreach ($wizardLabels as $key => $item)
 
@@ -21,8 +21,9 @@
          <div class="w-1/3 min-[1000px]:w-1/6 min-w-[100px] pt-[10px] pb-[10px]">
           <div class="w-[48px] m-auto">
             <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="24" r="22" stroke="black" stroke-width="2" fill="none" />
-              <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-size="18" font-family="Arial">
+              <circle cx="24" cy="24" r="22" stroke="#999" stroke-width="1" fill="none" />
+              <text x="50%" y="50%" text-anchor="middle" dy=".35em" font-size="18"
+                fill="black" font-family="Arial">
                 {{$key}}
               </text>
             </svg>
@@ -34,9 +35,6 @@
          @endif
           
       @endforeach
-
-     
-      
  
     </div>
  </div>

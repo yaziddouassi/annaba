@@ -1,8 +1,8 @@
-<div class="gap-[10px] p-[10px]" style="display:flex;flex-wrap : wrap; ">
+<div class="gap-[10px] p-[10px] pt-[0px]" style="display:flex;flex-wrap : wrap; ">
     @if ($wizardCount > 1)
       <div>
         <button wire:click="conteneurWizardBack()"
-        class="bg-black p-[9px] w-[80px]  text-white rounded-[2px]">BACK</button>
+        class="bg-black p-[11px] text-white rounded-[4px]">{{$annabaPrecedentLabel}}</button>
       </div>
     @endif
 
@@ -11,7 +11,7 @@
        @if(in_array($wizardCount, $wizardStops))
        <div>
          <button wire:click="conteneurWizardUpdate()"
-         class="bg-[blue] w-[80px] text-white p-[9px] rounded-[2px]">Update</button>
+         class="bg-[blue] min-w-[80px] text-white p-[11px] rounded-[4px]">{{$annabaBtnModifierLabel}}</button>
         </div>
        @endif
     @endif
@@ -20,14 +20,14 @@
        @if ($wizardCount == $wizardSteps)
        <div>
        <button wire:click="conteneurWizardUpdate()"
-        class="bg-[blue] w-[80px] text-white p-[9px] rounded-[2px]">Update</button>
+        class="bg-[blue] min-w-[80px] text-white p-[11px] rounded-[4px]">{{$annabaBtnModifierLabel}}</button>
       </div>
        @endif
 
     @if ($wizardCount < $wizardSteps)
        <div>
           <button  wire:click="conteneurWizardNext()"
-          class="bg-black p-[9px] w-[80px] text-white rounded-[2px]">NEXT</button> 
+          class="bg-black p-[11px] text-white rounded-[4px]">{{$annabaSuivantLabel}}</button> 
        </div> 
     @endif
 

@@ -5,7 +5,7 @@
 
     <div>
         <select type="text" wire:model="annabaFields.{{$field}}"
-         class="w-full  bg-[#E8E8E8] h-[50px]
+         class="w-full rounded-[4px] h-[50px]
         border-[darkblue] border-[1px]">
             <option value=""></option>
             @foreach ($collection as $key => $item)

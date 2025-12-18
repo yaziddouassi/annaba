@@ -32,6 +32,9 @@ class $e extends WizardUpdate
     public \$annabaModel = \"$a\";
     public \$annabaModelName =  \"$b\";
     public \$annabaModelClass = \"$c\";
+    public \$annabaSuivantLabel = 'Suivant';
+    public \$annabaPrecedentLabel = 'Precedent';
+    public \$annabaBtnModifierLabel = 'Modifier';
     
     public \$annabaRecord = null;
     public \$annabaNullables = [];

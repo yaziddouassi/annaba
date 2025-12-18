@@ -32,6 +32,12 @@ class $e extends WizardCreator
     public \$annabaModel = \"$a\";
     public \$annabaModelName =  \"$b\";
     public \$annabaModelClass = \"$c\";
+
+    public \$annabaBtnCreateLabel = 'Valider;
+    public \$annabaBtnCreateOtherLabel = 'Creer un autre';
+    public \$annabaSuivantLabel = 'Suivant';
+    public \$annabaPrecedentLabel = 'Precedent';
+    public \$annabaBtnCreateOther = 'yes';
     
     public \$annabaRecord = null;
     public \$annabaNullables = [];

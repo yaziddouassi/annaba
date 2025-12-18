@@ -213,8 +213,11 @@ class WizardUpdate extends Component
 
       $this->annabaRecord = $this->annabaModelClass::find($id);
         if($this->annabaRecord == null) {
-         return $this->redirect($this->annabaRouteListe, navigate: true);
+          abort(404);
         }
+
+        if($this->annabaRecord != null) {
+
        foreach ($this->annabaFields as $cle => $fields) {
         if (in_array($cle,$this->annabaRecord->getFillable())) {
            $this->annabaFields[$cle] =  $this->annabaRecord[$cle];
@@ -233,6 +236,7 @@ class WizardUpdate extends Component
        } 
     }
 
+    }
 
    }
 

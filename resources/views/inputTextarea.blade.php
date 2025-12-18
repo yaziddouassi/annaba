@@ -5,7 +5,7 @@
    <div>
       <textarea 
          wire:model="annabaFields.{{$field}}" 
-         class="w-full bg-[#E8E8E8] min-h-[120px] p-3 border-[darkblue] border-[1px] resize-y"
+         class="w-full min-h-[120px] p-3 border-[darkblue] border-[1px] resize-y"
          rows="5"
       ></textarea>
    </div>

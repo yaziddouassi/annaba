@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Hash;
 
 class AnnabaCreator extends Component
 {
+
+    public $annabaPreviewUrl = [] ;
+
+     public function initAnnabaPreviewUrl()
+    {
+        foreach ($this->annabaFiles as $key => $value) {
+            $this->annabaPreviewUrl[$key] = null ;
+         }
+    }
+
+
+     public function initAnnaba()
+    {
+      $this->initAnnabaPreviewUrl();
+    }
+
+
     public function annabaInsert()
     {
         $this->annabaRecord = new $this->annabaModelClass;
@@ -41,7 +58,7 @@ class AnnabaCreator extends Component
        $this->annabaRecord['updated_at'] = $now;
 
        $this->annabaUpload();
-      
+       $this->initAnnabaPreviewUrl();
     }
 
 

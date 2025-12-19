@@ -20,7 +20,16 @@ class WizardUpdate extends Component
     public $annabaFile0pens =  [];
     public $annabaMultipleFileRecords =  [];
     public $annabaMultipleFileErrors =  [];
+    public $annabaPreviewUrl = [] ;
+    public $annabaHasNewUpload = [] ;
 
+    public function initAnnabaPreviewUrl()
+    {
+        foreach ($this->annabaFiles as $key => $value) {
+            $this->annabaPreviewUrl[$key] = null ;
+            $this->annabaHasNewUpload[$key] = false ;
+         }
+    }
 
     public function wizardInit($steps,$labels)
     {
@@ -29,6 +38,7 @@ class WizardUpdate extends Component
         foreach ($labels as $key => $value) {
             $this->wizardLabels[$key + 1] = $value;
         }
+        $this->initAnnabaPreviewUrl();
     }
 
     public function wizardValidation($a) {}
@@ -136,7 +146,7 @@ class WizardUpdate extends Component
         }
     
          $this->annabaUpload();
-    
+         $this->initAnnabaPreviewUrl();
     }
     
 

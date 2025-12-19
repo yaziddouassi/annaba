@@ -17,6 +17,16 @@ class AnnabaUpdate extends Component
    public $annabaFile0pens =  [];
    public $annabaMultipleFileRecords =  [];
    public $annabaMultipleFileErrors =  [];
+   public $annabaPreviewUrl = [] ;
+   public $annabaHasNewUpload = [] ;
+
+   public function initAnnabaPreviewUrl()
+    {
+        foreach ($this->annabaFiles as $key => $value) {
+            $this->annabaPreviewUrl[$key] = null ;
+            $this->annabaHasNewUpload[$key] = false ;
+         }
+    }
 
    public function conteneurannabaUpdate()
    {
@@ -97,7 +107,7 @@ public function annabaChanger() {
     }
 
      $this->annabaUpload();
-
+     $this->initAnnabaPreviewUrl();
 }
 
 
@@ -201,6 +211,8 @@ public function annabaInit($id) {
         $this->annabaMultipleFileRecords[$cle] = $this->annabaRecord[$cle] ;
        } 
     }
+
+    $this->initAnnabaPreviewUrl();
 
     }
 

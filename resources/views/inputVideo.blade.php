@@ -1,6 +1,6 @@
-{{--  @inputVidep($tabfiles['file1'],'tabfiles.file1','Video1','*') --}}
 <div class="w-full"
-            x-data="{ isUploading: false, progress: 0 , videoPreviewUrl: null}"
+            x-data="{ isUploading: false, progress: 0 , videoPreviewUrl: null,
+             cle : '{{$file}}'}"
             x-on:livewire-upload-start="isUploading = true"
             x-on:livewire-upload-finish="isUploading = false"
             x-on:livewire-upload-error="isUploading = false"
@@ -17,21 +17,24 @@
                     <input type="file" wire:model="annabaFiles.{{$file}}" accept="video/*" hidden
                     x-ref="videoInput"
                    @change="if ($refs.videoInput.files.length) {
-                    videoPreviewUrl = URL.createObjectURL($refs.videoInput.files[0]);
+                    $wire.annabaPreviewUrl[cle] = URL.createObjectURL($refs.videoInput.files[0]);
                    }"
                   @foo.window="videoPreviewUrl=null"
                     />
-                    <div class="flex w-[100%] h-[50px] px-2 flex-col bg-[blue] rounded-full shadow text-[white] text-[14px] font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">Choose Video</div>
+                    <div class="flex w-[100%] h-[50px] px-2 flex-col border-[1px] border-black rounded-full 
+                    shadow text-black text-[14px] font-semibold leading-4 items-center 
+                    justify-center cursor-pointer focus:outline-none">Choisir une vidéo</div>
                   </label>
             </div>
 
             
-            <template x-if="videoPreviewUrl">
+             @if ($annabaFiles[$file])
+            <template x-if="$wire.annabaPreviewUrl[cle]">
                  <div class="mt-4 w-full">
-                    <span class="text-green-600 font-semibold">Aperçu de la vidéo :</span>
-                    <video class="mt-2 w-full max-w-[500px] rounded shadow border" controls :src="videoPreviewUrl"></video>
+                    <video class="mt-2 w-full max-w-[500px] max-h-[50vh] rounded shadow border" controls :src="$wire.annabaPreviewUrl[cle]"></video>
                  </div>
             </template>
+             @endif
 
             <!-- Progress Bar -->
             <div x-show="isUploading">

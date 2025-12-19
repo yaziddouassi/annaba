@@ -17,7 +17,7 @@ class WizardCreator extends Component
     public $wizardCount = 1;
     public $wizardSteps = 0 ;
     public $wizardLabels = array() ;
-
+    public $annabaPreviewUrl = [] ;
     
     public function annabaReset()
     {
@@ -43,9 +43,17 @@ class WizardCreator extends Component
     }
 
 
+     public function initAnnabaPreviewUrl()
+    {
+        foreach ($this->annabaFiles as $key => $value) {
+            $this->annabaPreviewUrl[$key] = null ;
+         }
+    }
 
     public function wizardInit($steps,$labels)
     {
+        $this->initAnnabaPreviewUrl();
+
         $this->wizardSteps = $steps;
        
         foreach ($labels as $key => $value) {
@@ -111,7 +119,7 @@ class WizardCreator extends Component
        $this->annabaRecord['updated_at'] = $now;
 
        $this->annabaUpload();
-      
+       $this->initAnnabaPreviewUrl();
     }
 
 

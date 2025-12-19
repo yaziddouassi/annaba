@@ -46,6 +46,7 @@ class $e extends AnnabaCreator
 
     public function mount() {
         \$this->annabaUrlStorage =  config('annaba.urlstorage');
+        \$this->initAnnaba();
     }
 
     public function annabaCreate() {

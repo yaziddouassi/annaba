@@ -1,5 +1,6 @@
 <div class="w-full"
-            x-data="{ isUploading: false, progress: 0 , audioPreviewUrl: null}"
+            x-data="{ isUploading: false, progress: 0 , videoPreviewUrl: null,
+             cle : '{{$file}}'}"
             x-on:livewire-upload-start="isUploading = true"
             x-on:livewire-upload-finish="isUploading = false"
             x-on:livewire-upload-error="isUploading = false"
@@ -13,50 +14,52 @@
         
             <div class="w-[100%]  flex items-center justify-center">
                 <label class="w-[100%]">
-                    <input type="file" wire:model="annabaFiles.{{$file}}"  accept="audio/*" hidden
-                     x-ref="audioInput"
-                   @change="if ($refs.audioInput.files.length) {
-                    audioPreviewUrl= URL.createObjectURL($refs.audioInput.files[0]);
+                    <input type="file" wire:model="annabaFiles.{{$file}}" accept="audio/*" hidden
+                    x-ref="videoInput"
+                   @change="if ($refs.videoInput.files.length) {
+                    $wire.annabaPreviewUrl[cle] = URL.createObjectURL($refs.videoInput.files[0]);
                    }"
-                  @foo.window="audioPreviewUrl=null"
+                  @foo.window="videoPreviewUrl=null"
                     />
-                    <div class="flex w-[100%] h-[50px] px-2 flex-col bg-[blue] rounded-full shadow text-[white] text-[14px] font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">Choose Audio</div>
+                    <div class="flex w-[100%] h-[50px] px-2 flex-col border-[1px] border-black rounded-full 
+                    shadow text-black text-[14px] font-semibold leading-4 items-center 
+                    justify-center cursor-pointer focus:outline-none">Choisir un audio</div>
                   </label>
             </div>
 
+            
+             @if ($annabaFiles[$file])
+            <template x-if="$wire.annabaPreviewUrl[cle]">
+                 <div class="mt-4 w-full">
+                    <audio class="mt-2 w-full" controls :src="$wire.annabaPreviewUrl[cle]"></audio>
+                 </div>
+            </template>
+             @endif
 
-            <!-- ✅ Aperçu audio du dernier fichier sélectionné -->
-    <template x-if="audioPreviewUrl">
-        <div class="mt-4 w-full">
-            <span class="text-green-600 font-semibold">Dernier audio ajouté :</span>
-            <audio class="mt-2 w-full" controls :src="audioPreviewUrl"></audio>
-        </div>
-    </template>
-
-
+            <!-- Progress Bar -->
             <div x-show="isUploading">
               <progress max="100" x-bind:value="progress" class="h-[10px] bg-[blue] rounded-[5px]"></progress>
+          </div>
+      
+        
+          <div class="pt-[5px]">
+               @if ($annabaFiles[$file])
+               <div class="bg-[#DDD] text-black border-[2px] border-white mt-[10px]
+              p-[10px] pb-[20px] pt-[20px] rounded-[5px]">
+               {{ $annabaFiles[$file]->getClientOriginalName() }}
+             </div>
+            @endif
           </div>
 
             
 
-         <div class="pt-[5px]">
-           @if ($annabaFiles[$file])
-              <div class="bg-[#DDD] text-black border-[2px] border-white mt-[10px]
-               p-[10px] pb-[20px] pt-[20px] rounded-[5px]">
-            {{ $annabaFiles[$file]->getClientOriginalName() }}
-            </div>
-           @endif
-         </div>
 
-
+          
             @error("annabaFiles.$file")
               <div class="text-[red] pt-[5px]">
                 <span class="error">{{ $message }}</span> 
               </div>
              @enderror
 
-            <!-- Progress Bar -->
-           
-        
+
 </div>

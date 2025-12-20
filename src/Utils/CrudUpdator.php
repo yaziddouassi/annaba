@@ -13,7 +13,7 @@ class CrudUpdator
    
      $this->piece1 ="<?php
 
-namespace App\Livewire;
+namespace App\Livewire\Annaba;
 
 use Livewire\Component;
 

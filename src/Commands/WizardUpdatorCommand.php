@@ -40,11 +40,19 @@ class WizardUpdatorCommand extends Command
         $create1 = $model;
         $create2 = $CreateString->transformDatabase($model);
         $create3 = "App\\Models\\" . $model;
-        $create4 = "livewire." . $form ;
+        $create4 = "livewire.annaba." . $form ;
         $create5 = Str::ucfirst($form);
 
-        $chemin1  = 'app/Livewire/' . $create5 . '.php' ;
-        $chemin2  = 'resources/views/livewire/' . $form . '.blade.php' ;
+        $chemin1  = 'app/Livewire/Annaba/' . $create5 . '.php' ;
+        $chemin2  = 'resources/views/livewire/annaba/' . $form . '.blade.php' ;
+
+        if (!File::exists("app/Livewire/Annaba")) {
+            File::makeDirectory("app/Livewire/Annaba", 0755, true);
+        }
+
+        if (!File::exists("resources/views/livewire/annaba")) {
+            File::makeDirectory("resources/views/livewire/annaba", 0755, true);
+        }
 
         // Check if files already exist
         if (File::exists($chemin1)) {

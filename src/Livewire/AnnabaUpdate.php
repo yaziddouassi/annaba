@@ -19,6 +19,7 @@ class AnnabaUpdate extends Component
    public $annabaMultipleFileErrors =  [];
    public $annabaPreviewUrl = [] ;
    public $annabaHasNewUpload = [] ;
+   public $annabaRecordBis = [];
 
    public function initAnnabaPreviewUrl()
     {
@@ -108,6 +109,7 @@ public function annabaChanger() {
 
      $this->annabaUpload();
      $this->initAnnabaPreviewUrl();
+     $this->annabaRecordBis = $this->annabaRecord->toArray() ;
 }
 
 
@@ -191,6 +193,8 @@ public function annabaInit($id) {
     if($this->annabaRecord == null) {
          abort(404);
     }
+
+    $this->annabaRecordBis = $this->annabaRecord->toArray() ;
 
     if($this->annabaRecord != null) {
 

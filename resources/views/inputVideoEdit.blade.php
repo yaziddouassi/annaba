@@ -4,7 +4,29 @@
                 progress: 0, 
                 videoPreviewUrl: null,
                 hasNewUpload: false,
-                cle : '{{$file}}'
+                cle : '{{$file}}',
+                oldVideoUrl: '',
+
+                init() {
+                  console.log($wire.annabaRecordBis)
+                  this.updateOldVideoUrl();
+                  
+                  // Écouter les changements de Livewire
+                  this.$watch('$wire.annabaRecordBis', () => {
+                      this.updateOldVideoUrl();
+                  });
+                  
+                  this.$watch('$wire.annabaUrlStorage', () => {
+                      this.updateOldVideoUrl();
+                  });
+                },
+                
+                updateOldVideoUrl() {
+                    if ($wire.annabaRecordBis && $wire.annabaRecordBis[this.cle]) {
+                        this.oldVideoUrl = $wire.annabaUrlStorage + $wire.annabaRecordBis[this.cle];
+                        console.log('URL mise à jour:', this.oldVideoUrl);
+                    }
+                }
             }"
             x-on:livewire-upload-start="isUploading = true"
             x-on:livewire-upload-finish="isUploading = false; $wire.annabaHasNewUpload[cle] = true"
@@ -53,18 +75,16 @@
             </div>
 
             <!-- Affichage de l'ancienne vidéo (seulement si pas de nouveau upload) -->
-            <div class="" x-show="!$wire.annabaPreviewUrl[cle] && !$wire.annabaHasNewUpload[cle]">
+            @if ($annabaRecord != null && isset($annabaRecord[$file]))
+            <template x-if="!$wire.annabaPreviewUrl[cle] && !$wire.annabaHasNewUpload[cle] && oldVideoUrl">
                 <div class="mt-[5px]">
-                    @if ($annabaRecord != null && isset($annabaRecord[$file]))
-                        <video width="100%" class="max-h-[50vh]" controls="controls">
-                            <source src="{{$annabaUrlStorage}}{{ $annabaRecord[$file]}}" type="video/mp4" />
-                        </video> 
-                    @endif
-                </div>  
-            </div>
+                    <video class="w-full max-h-[50vh]" controls x-bind:src="oldVideoUrl">
+                        <source x-bind:src="oldVideoUrl" type="video/mp4" />
+                    </video>
+                </div>
+            </template>
+            @endif
 
-             
-                
             <!-- Nom du fichier uploadé -->
             <div class="pt-[5px]" x-show="$wire.annabaPreviewUrl[cle]">
                 @if ($annabaFiles[$file])

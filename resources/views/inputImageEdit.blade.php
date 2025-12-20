@@ -4,7 +4,29 @@
                 progress: 0, 
                 videoPreviewUrl: null,
                 hasNewUpload: false,
-                cle : '{{$file}}'
+                cle : '{{$file}}',
+                oldVideoUrl: '',
+
+                init() {
+                  console.log($wire.annabaRecordBis)
+                  this.updateOldVideoUrl();
+                  
+                  // Écouter les changements de Livewire
+                  this.$watch('$wire.annabaRecordBis', () => {
+                      this.updateOldVideoUrl();
+                  });
+                  
+                  this.$watch('$wire.annabaUrlStorage', () => {
+                      this.updateOldVideoUrl();
+                  });
+                },
+                
+                updateOldVideoUrl() {
+                    if ($wire.annabaRecordBis && $wire.annabaRecordBis[this.cle]) {
+                        this.oldVideoUrl = $wire.annabaUrlStorage + $wire.annabaRecordBis[this.cle];
+                        console.log('URL mise à jour:', this.oldVideoUrl);
+                    }
+                }
             }"
             x-on:livewire-upload-start="isUploading = true"
             x-on:livewire-upload-finish="isUploading = false; $wire.annabaHasNewUpload[cle] = true"
@@ -32,7 +54,7 @@
                     <div class="flex w-[100%] h-[50px] px-2 flex-col border-[1px] border-black rounded-full 
                     shadow text-black text-[14px] font-semibold leading-4 items-center justify-center
                     cursor-pointer focus:outline-none">
-                        Choisir une Image
+                        Choisir une image
                     </div>
                 </label>
             </div>
@@ -53,17 +75,15 @@
             </div>
 
             <!-- Affichage de l'ancienne vidéo (seulement si pas de nouveau upload) -->
-            <div class="" x-show="!$wire.annabaPreviewUrl[cle] && !$wire.annabaHasNewUpload[cle]">
+            @if ($annabaRecord != null && isset($annabaRecord[$file]))
+            <template x-if="!$wire.annabaPreviewUrl[cle] && !$wire.annabaHasNewUpload[cle] && oldVideoUrl">
                 <div class="mt-[5px]">
-                    @if ($annabaRecord != null && isset($annabaRecord[$file]))
-                            <img src="{{$annabaUrlStorage}}{{ $annabaRecord[$file]}}"
-                            class="mt-2 w-full max-w-[500px] max-h-[50vh] rounded shadow border" />
-                    @endif
-                </div>  
-            </div>
+                     <img x-bind:src="oldVideoUrl"
+                          class="mt-2 w-full max-w-[500px] max-h-[50vh] rounded shadow border" />
+                </div>
+            </template>
+            @endif
 
-             
-                
             <!-- Nom du fichier uploadé -->
             <div class="pt-[5px]" x-show="$wire.annabaPreviewUrl[cle]">
                 @if ($annabaFiles[$file])

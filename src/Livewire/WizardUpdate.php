@@ -22,6 +22,7 @@ class WizardUpdate extends Component
     public $annabaMultipleFileErrors =  [];
     public $annabaPreviewUrl = [] ;
     public $annabaHasNewUpload = [] ;
+    public $annabaRecordBis = [];
 
     public function initAnnabaPreviewUrl()
     {
@@ -147,6 +148,7 @@ class WizardUpdate extends Component
     
          $this->annabaUpload();
          $this->initAnnabaPreviewUrl();
+         $this->annabaRecordBis = $this->annabaRecord->toArray() ;
     }
     
 
@@ -225,6 +227,8 @@ class WizardUpdate extends Component
         if($this->annabaRecord == null) {
           abort(404);
         }
+
+         $this->annabaRecordBis = $this->annabaRecord->toArray() ;
 
         if($this->annabaRecord != null) {
 

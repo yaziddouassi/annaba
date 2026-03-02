@@ -75,7 +75,7 @@
             </div>
 
             <!-- Affichage de l'ancienne vidéo (seulement si pas de nouveau upload) -->
-            @if ($annabaRecord != null && isset($annabaRecord[$file]))
+            @if ($annabaRecord != null && isset($annabaRecord[$file]) && !$annabaFiles[$file])
             <template x-if="!$wire.annabaPreviewUrl[cle] && !$wire.annabaHasNewUpload[cle] && oldVideoUrl">
                 <div class="mt-[5px]">
                     <video class="w-full max-h-[50vh]" controls x-bind:src="oldVideoUrl">
